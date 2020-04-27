@@ -26,4 +26,15 @@ class Solution {
         }
         return ans[n2][n1];
     }
+    
+    //Recursion O(2^n)
+    public int longestCommonSubsequence(String text1, String text2, int m, int n)
+    {
+        if(m == 0 || n == 0)
+            return 0;
+        if(text1.charAt(m) == text2.charAt(n))
+            return 1 + longestCommonSubsequence(text1, text2, m - 1, n - 1);
+        else
+            return longestCommonSubsequence(text1, text2, m, n - 1) + longestCommonSubsequence(text1, text2, m - 1, n);
+    }
 }
