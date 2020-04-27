@@ -1,0 +1,29 @@
+class Solution {
+//Dynamic Programming O(n^2)
+    public int longestCommonSubsequence(String text1, String text2) {
+        int n1 = text1.length();
+        int n2 = text2.length();
+        if(n1 == 0 || n2 == 0)
+            return 0;
+        int[][] ans = new int[n2 + 1][n1 + 1];
+        for(int i = 0; i < n2 + 1; i++)
+            ans[i][0] = 0;
+        for(int i = 0; i < n1 + 1; i++)
+            ans[0][i] = 0;
+        for(int i = 0; i < n2; i++)
+        {
+            for(int j = 0; j < n1; j++)
+            {
+                if(text1.charAt(j) == text2.charAt(i))
+                {
+                    ans[i + 1][j + 1] = ans[i][j] + 1;
+                }
+                else
+                {
+                    ans[i + 1][j + 1] = Math.max(ans[i][j + 1], ans[i + 1][j]);
+                }
+            }
+        }
+        return ans[n2][n1];
+    }
+}
